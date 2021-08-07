@@ -31,7 +31,7 @@ build: ## Build the release and develoment container. The development
 	docker build -t $(APP_NAME) .
 
 run: ## Run container on port configured in `config.env`
-	docker run -i -t --rm --env-file=./config.env -p=$(PORT):$(PORT) --name="$(APP_NAME)" $(APP_NAME)
+	docker run -i -t -d --rm --env-file=./config.env -p=$(PORT):$(PORT) --name="$(APP_NAME)" $(APP_NAME)
 
 stop: ## Stop and remove a running container
 	docker stop $(APP_NAME); docker rm $(APP_NAME)
@@ -41,6 +41,10 @@ clean: ## Clean the generated/compiles files
 
 version: ## Output the current version
 	@echo $(VERSION)
+
+# *** test ***
+test: clean stop run
+	docker exec -it $(APP_NAME) npm test
 
 # *** image tagging ***
 tag: tag-latest tag-version ## Generate container tags for the `{version}` ans `latest` tags
