@@ -24,17 +24,17 @@ help: ## This help.
 # DOCKER TASKS
 
 # *** run ***
-up: build run ## Run container on port configured in `config.env` (Alias to run)
+up: build stop run ## Run container on port configured in `config.env` (Alias to run)
 
 # Build the container
 build: ## Build the release and develoment container. The development
 	docker build -t $(APP_NAME) .
 
 run: ## Run container on port configured in `config.env`
-	docker run -i -t -d --rm --env-file=./config.env -p=$(PORT):$(PORT) --name="$(APP_NAME)" $(APP_NAME)
+	docker run -i -t -d --env-file=./config.env -p=$(PORT):$(PORT) --name=$(APP_NAME) $(APP_NAME)
 
 stop: ## Stop and remove a running container
-	docker stop $(APP_NAME); docker rm $(APP_NAME)
+	docker container stop $(APP_NAME) && docker rm -f $(APP_NAME) || true
 
 clean: ## Clean the generated/compiles files
 	echo "nothing clean ..."

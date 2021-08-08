@@ -45,3 +45,9 @@ publish-version                Publish the `{version}` taged container to Docker
 repo-login                     Auto login to Docker Hub container registry
 
 # make build
+
+## lab 1 ##
+
+* https://www.youtube.com/watch?v=rRg7DMAXC78
+* branch feature/1-Starter
+  https://github.com/boonchu/react-redux-tutorial/tree/feature/1-Starter
